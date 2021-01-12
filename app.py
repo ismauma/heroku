@@ -14,5 +14,4 @@ def fun():
     client = pymongo.MongoClient(uri)
 
     db = client.get_default_database()
-    songs = db['songs']
-    return songs.find()
+    return db.songs.find()
