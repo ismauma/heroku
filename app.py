@@ -10,6 +10,4 @@ def fun():
 
     db = client.get_default_database()
 
-    songs = db['songs']
-
-    return songs
+    return db.songs.find()
