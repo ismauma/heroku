@@ -10,9 +10,3 @@ mongo = client.get_database('prueba')
 @app.route('/', methods=['GET'])
 def nothing():
     return "Hello world"
-
-@app.route('/songs', methods=['GET'])
-def fun():
-    songs = mongo.db.songs.find()
-    response = flask.jsonify(songs)
-    return Response(response, mimetype='application/json')
