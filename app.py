@@ -4,6 +4,8 @@ import pymongo
 app = flask.Flask(__name__)
 
 uri = 'mongodb+srv://admin:admin@cluster0.wepwf.mongodb.net/prueba?retryWrites=true&w=majority'
+client = pymongo.MongoClient(uri)
+mongo = client.get_database('prueba')
 
 @app.route('/', methods=['GET'])
 def nothing():
@@ -11,8 +13,6 @@ def nothing():
 
 @app.route('/songs', methods=['GET'])
 def fun():
-    client = pymongo.MongoClient(uri)
-
-    db = client.get_default_database()
-    songs = db.songs
-    return flask.jsonify(songs)
+    songs = mongo.db.songs.find()
+    response = flask.jsonify(songs)
+    return Response(response, mimetype='application/json')
